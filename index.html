@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carbon Saver - Sign Up</title>
+  <link rel="stylesheet" href="next.css" />
+</head>
+<body>
+  <div id="signup-page">
+    <h2>Sign Up</h2>
+    <input type="email" id="signup-email" placeholder="Email" />
+    <input type="password" id="signup-password" placeholder="Create Password" />
+    <button id="signup-btn">Create Account</button>
+  </div>
+
+  <!-- Firebase SDK and Sign-up Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDnPT1puwmZ2b4eBSyK2xfGuAsiSsw5D8M",
+      authDomain: "carbon-saver-website.firebaseapp.com",
+      projectId: "carbon-saver-website",
+      storageBucket: "carbon-saver-website.appspot.com",
+      messagingSenderId: "453253776917",
+      appId: "1:453253776917:web:f74701cb520b768638f01c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Signup Logic
+    document.getElementById("signup-btn").addEventListener("click", () => {
+      const email = document.getElementById("signup-email").value;
+      const password = document.getElementById("signup-password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("Account created successfully!");
+          window.location.href = "index2.html"; // Redirect to login page
+        })
+        .catch(error => {
+          alert("Signup failed: " + error.message);
+        });
+    });
+  </script>
+  <script src="script.js"></script>
+
+</body>
+</html>
